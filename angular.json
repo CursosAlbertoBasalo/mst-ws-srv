@@ -3,5 +3,41 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
+    "mst-srv": {
+      "projectType": "library",
+      "root": "projects/mst-srv",
+      "sourceRoot": "projects/mst-srv/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/mst-srv/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/mst-srv/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/mst-srv/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "tsConfig": "projects/mst-srv/tsconfig.spec.json",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "analytics": false
   }
 }
