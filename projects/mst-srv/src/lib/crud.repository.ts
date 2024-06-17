@@ -8,6 +8,11 @@ import {
 } from '@angular/core';
 
 export const API_URL_TOKEN = new InjectionToken<string>('API_URL');
+export function provideCrudRepository(apiUrl: string): EnvironmentProviders {
+  return makeEnvironmentProviders([
+    { provide: API_URL_TOKEN, useValue: apiUrl },
+  ]);
+}
 
 @Injectable({
   providedIn: 'root',
@@ -45,10 +50,4 @@ export class CrudRepository {
     const url = `${this.#apiUrl}/${resource}/${id}`;
     return this.#http.delete<T>(url);
   }
-}
-
-export function provideCrudRepository(apiUrl: string): EnvironmentProviders {
-  return makeEnvironmentProviders([
-    { provide: API_URL_TOKEN, useValue: apiUrl },
-  ]);
 }
